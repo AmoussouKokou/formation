@@ -16,11 +16,11 @@ num_col <- function(Var, donnees) match(Var, colnames(donnees), nomatch = 0)
 
 setwd("d:/Projet/formation")
 
-df <- read_csv("data/processed/for_acp.csv")
-
+df <- read_csv("data/processed/cse_for_acp.csv")
 acp <- PCA(
   df, scale.unit = T, ncp = Inf, 
   quanti.sup = NULL, quali.sup = num_col("SeriousDlqin2yrs", df), graph = F
 )
+
 options(shiny.launch.browser = TRUE)
 explor(acp)
