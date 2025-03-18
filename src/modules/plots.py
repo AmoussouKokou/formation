@@ -14,14 +14,14 @@ class Plots:
         """
         self.data = data
 
-    def histogram(self, var_quant, var_cat=None, bins=30):
+    def histogram(self, var_quant, var_cat=None, bins=30, figsize=(8, 5)):
         """
         Affiche un histogramme pour une variable quantitative.
         :param var_quant: Nom de la variable quantitative.
         :param var_cat: (Optionnel) Nom de la variable catégorielle pour comparaison.
         :param bins: Nombre de bins.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         if var_cat:
             sns.histplot(data=self.data, x=var_quant, hue=var_cat, bins=bins, kde=True, palette="Set2", alpha=0.7)
         else:
@@ -31,13 +31,13 @@ class Plots:
         plt.grid(True)
         plt.show()
 
-    def density(self, var_quant, var_cat=None):
+    def density(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
         Affiche une courbe de densité pour une variable quantitative.
         :param var_quant: Nom de la variable quantitative.
         :param var_cat: (Optionnel) Nom de la variable catégorielle pour comparaison.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         if var_cat:
             sns.kdeplot(data=self.data, x=var_quant, hue=var_cat, fill=True, common_norm=False, palette="Set2")
         else:
@@ -47,13 +47,13 @@ class Plots:
         plt.grid(True)
         plt.show()
 
-    def boxplot(self, var_quant, var_cat=None):
+    def boxplot(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
         Affiche un boxplot pour une variable quantitative.
         :param var_quant: Nom de la variable quantitative.
         :param var_cat: (Optionnel) Nom de la variable catégorielle pour comparaison.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         if var_cat:
             sns.boxplot(data=self.data, x=var_cat, y=var_quant, palette="Set2")
         else:
@@ -62,13 +62,13 @@ class Plots:
         plt.grid(True)
         plt.show()
 
-    def violin(self, var_quant, var_cat=None):
+    def violin(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
         Affiche un violin plot pour une variable quantitative.
         :param var_quant: Nom de la variable quantitative.
         :param var_cat: (Optionnel) Nom de la variable catégorielle pour comparaison.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         if var_cat:
             sns.violinplot(data=self.data, x=var_cat, y=var_quant, palette="Set2")
         else:
@@ -77,26 +77,26 @@ class Plots:
         plt.grid(True)
         plt.show()
 
-    def barplot(self, var_cat):
+    def barplot(self, var_cat, figsize=(8, 5)):
         """
         Affiche un barplot pour une variable catégorielle.
         :param var_cat: Nom de la variable catégorielle.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         sns.countplot(data=self.data, x=var_cat, palette="Set2")
         plt.title(f"Répartition des catégories de {var_cat}")
         plt.xticks(rotation=45)
         plt.grid(True)
         plt.show()
 
-    def scatter(self, var_x, var_y, var_cat=None):
+    def scatter(self, var_x, var_y, var_cat=None, figsize=(8, 5)):
         """
         Affiche un scatterplot entre deux variables quantitatives.
         :param var_x: Nom de la variable en axe X.
         :param var_y: Nom de la variable en axe Y.
         :param var_cat: (Optionnel) Nom de la variable catégorielle pour colorer les points.
         """
-        plt.figure(figsize=(8, 5))
+        plt.figure(figsize=figsize)
         sns.scatterplot(data=self.data, x=var_x, y=var_y, hue=var_cat, palette="Set2", alpha=0.8)
         plt.title(f"Scatterplot de {var_x} vs {var_y}")
         plt.grid(True)
