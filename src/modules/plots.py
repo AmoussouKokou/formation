@@ -55,7 +55,7 @@ class Plots:
         """
         plt.figure(figsize=figsize)
         if var_cat:
-            sns.boxplot(data=self.data, x=var_cat, y=var_quant, palette="Set2")
+            sns.boxplot(data=self.data, x=var_cat, y=var_quant, hue=var_cat, palette="Set2")
         else:
             sns.boxplot(y=self.data[var_quant], color="blue")
         plt.title(f"Boxplot de {var_quant}")
