@@ -29,7 +29,7 @@ class Plots:
         plt.title(f"Histogramme de {var_quant}")
         plt.xlabel(var_quant)
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def density(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
@@ -45,7 +45,7 @@ class Plots:
         plt.title(f"Densité de {var_quant}")
         plt.xlabel(var_quant)
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def boxplot(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
@@ -60,7 +60,7 @@ class Plots:
             sns.boxplot(y=self.data[var_quant], color="blue")
         plt.title(f"Boxplot de {var_quant}")
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def violin(self, var_quant, var_cat=None, figsize=(8, 5)):
         """
@@ -75,7 +75,7 @@ class Plots:
             sns.violinplot(y=self.data[var_quant], color="blue")
         plt.title(f"Violin plot de {var_quant}")
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def barplot(self, var_cat, figsize=(8, 5)):
         """
@@ -87,7 +87,7 @@ class Plots:
         plt.title(f"Répartition des catégories de {var_cat}")
         plt.xticks(rotation=45)
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
     def scatter(self, var_x, var_y, var_cat=None, figsize=(8, 5)):
         """
@@ -100,7 +100,7 @@ class Plots:
         sns.scatterplot(data=self.data, x=var_x, y=var_y, hue=var_cat, palette="Set2", alpha=0.8)
         plt.title(f"Scatterplot de {var_x} vs {var_y}")
         plt.grid(True)
-        plt.show()
+        # plt.show()
 
 # ====== Exemple d'utilisation ======
 if __name__ == "__main__":
