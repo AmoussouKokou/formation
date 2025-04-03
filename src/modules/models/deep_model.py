@@ -77,21 +77,31 @@ class DeepModel(BaseEstimator, ClassifierMixin):
         # Choix de la métrique
         if self.metric == 'f1':
             return [F1Score(average=None)]
-        elif self.metric == "auc":
+        elif self.metric == "auc_pr":
             return [AUC(curve="PR")]
+        elif self.metric in ["auc_roc", "auc"]:
+            return [AUC(curve="ROC")]
         else:
             return ['accuracy']
     
     def predict(self, X, seuil = 0.5):
         """ Prédit les classes en utilisant argmax. """
         probas = self.modele.predict(X)
-        if seuil:
+        if self.couches[-1][0]<=1: # si c'est que la proba d etre 1
             return (probas > seuil).astype(int)
-        return np.argmax(probas, axis=1)
+        else: # si c'est la proba de chaque classe qui est retournée
+            return np.argmax(probas, axis=1)
     
-    def predict_proba(self, X):
-        """ Retourne les probabilités de classification. """
-        return self.modele.predict(X)
+    def predict_proba(self, X, all_classes = False):
+        """Retourne les probabilités de classification. 
+        all_classes: obtenir la proba de toutes les classes ? ou seulement de la classe dominante
+        """
+        if self.couches[-1][0]<=1:
+            return self.modele.predict(X)
+        elif all_classes:
+            self.modele.predict(X)
+        else:
+            return np.argmax(self.modele.predict(X))
 
     def set_params(self, **params):
         """ Permet de modifier les hyperparamètres. """

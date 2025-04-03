@@ -1,6 +1,17 @@
 import mlflow
+from mlflow.models import infer_signature
 
-def log_mlflow(model, params=None, metrics=None, artifacts=None, experiment_name="Default_Experiment", run_name=None, tags=None, tracking_uri="http://localhost:5000"):
+def log_mlflow(
+    model, 
+    params=None, 
+    metrics=None, 
+    artifacts=None, 
+    experiment_name="Default_Experiment", 
+    run_name=None, 
+    tags=None, 
+    tracking_uri="http://localhost:5000",
+    X=None
+):
     """
     Enregistre les paramètres, métriques, modèle et artefacts dans MLflow.
     
@@ -33,5 +44,19 @@ def log_mlflow(model, params=None, metrics=None, artifacts=None, experiment_name
         if artifacts:
             for artifact in artifacts:
                 mlflow.log_artifact(artifact)
+                
+        if X is not None:
+        
+            # Infer the model signature
+            signature = infer_signature(X, model.predict(X))
+
+            # Log the model
+            model_info = mlflow.sklearn.log_model(
+                sk_model=model,
+                artifact_path="cse_model",
+                signature=signature,
+                input_example=X,
+                registered_model_name="tracking-quickstart",
+            )
     
     print(f"Run enregistré sous l'expérience '{experiment_name}' sur {tracking_uri}")
